@@ -21,6 +21,8 @@ namespace ForExe
 
             WriteFile((Dictionary<string,int>)dict);
 
+            //Console.ReadKey();
+
         }
 
         static string ReadFile(string path = @"C:\Users\Ra19\Documents\project_hlam\Less_Sharp\Les\WAW.txt") {
