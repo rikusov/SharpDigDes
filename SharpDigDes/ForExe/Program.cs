@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 
 namespace ForExe
@@ -13,11 +14,10 @@ namespace ForExe
     {
         static void Main(string[] args)
         {
-            var CW = new ForDLL.CounterWords();
+            var tm = typeof(ForDLL.CounterWords).GetMethod("HowWords" ,BindingFlags.NonPublic | BindingFlags.Static);
 
-            var tm = CW.GetType().GetMethod("HowWords" ,BindingFlags.NonPublic | BindingFlags.Instance);
 
-            var dict = tm.Invoke(CW,new Object[] { ReadFile() });
+            var dict = tm.Invoke(null,new Object[] { ReadFile() });
 
             WriteFile((Dictionary<string,int>)dict);
 
@@ -27,7 +27,7 @@ namespace ForExe
             return (new StreamReader(path)).ReadToEnd();
         }
 
-        static void WriteFile(Dictionary<string,int> dict, string path = @"C:\Users\Ra19\Documents\project_hlam\Less_Sharp\Les\WAW.txt")
+        static void WriteFile(Dictionary<string,int> dict, string path = @"C:\Users\Ra19\Documents\project_hlam\Less_Sharp\Les\WAW1.txt")
         {
             var SW = new StreamWriter(path);
 

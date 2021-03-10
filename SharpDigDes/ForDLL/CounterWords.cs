@@ -1,21 +1,22 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace ForDLL
 {
-    public class CounterWords
+    public static class CounterWords
     {
 
-        private Dictionary<string, int> HowWords(string s)
+        private static Dictionary<string, int> HowWords(string s)
         {
             Dictionary<string, int> out_dict = new Dictionary<string, int>();
 
+            var new_s = Regex.Matches(Regex.Replace(s, @"[-]|[\d]", ""), @"\w+");
 
-            foreach (string item in FormatStr(s).Split(' '))
+            foreach (Match item in new_s)
             {
-                if (item == "" || item == " ") continue;
-                if (out_dict.ContainsKey(item)) out_dict[item]++;
-                else out_dict[item] = 1;
+                if (out_dict.ContainsKey(item.Value)) out_dict[item.Value]++;
+                else out_dict[item.Value] = 1;
             }
 
             out_dict = out_dict.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
@@ -23,12 +24,13 @@ namespace ForDLL
             return out_dict;
         }
 
-        private string FormatStr(string s)
+        private static string FormatStr(string s)
         {
 
-            string[] ElemChar = new string[] { ",", ".", "!", "?", "(", ")" };
+            string[] ElemChar = new string[] { ",", ".", "!", "?", "(", ")", "-", "\"", "—"};
             string out_str = s;
 
+            
             foreach (string item in ElemChar) out_str = out_str.Replace(item, "");
 
             return out_str.ToLower();
