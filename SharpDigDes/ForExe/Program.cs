@@ -2,10 +2,7 @@
 using System.Reflection;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Text.RegularExpressions;
+using System.Diagnostics;
 
 
 namespace ForExe
@@ -16,12 +13,25 @@ namespace ForExe
         {
             var tm = typeof(ForDLL.CounterWords).GetMethod("HowWords" ,BindingFlags.NonPublic | BindingFlags.Static);
 
+            Stopwatch watch = new Stopwatch();
+            watch.Start();
 
             var dict = tm.Invoke(null,new Object[] { ReadFile() });
 
+            watch.Stop();
+            Console.WriteLine("WitOutTask:" + watch.Elapsed);
+
+            for (int i = 1; i <= 16; i++) {
+                watch.Restart();
+                var dict2 = ForDLL.CounterWords.HowWords_p(ReadFile(), i);
+                watch.Stop();
+                Console.WriteLine("WithTask(CountTask = {0}):{1}",i,watch.Elapsed);
+                WriteFile((Dictionary<string, int>)dict2, @"C:\Users\Ra19\Documents\project_hlam\Less_Sharp\Les\WAW"+i+".txt");
+            }
+
             WriteFile((Dictionary<string,int>)dict);
 
-            //Console.ReadKey();
+            Console.ReadKey();
 
         }
 
