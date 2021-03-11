@@ -16,7 +16,9 @@ namespace ForExe
             Stopwatch watch = new Stopwatch();
             watch.Start();
 
-            var dict = tm.Invoke(null,new Object[] { ReadFile() });
+            string in_data = ReadFile();
+
+            var dict = tm.Invoke(null,new Object[] { in_data });
 
             watch.Stop();
             Console.WriteLine("WitOutTask:" + watch.Elapsed);
@@ -25,7 +27,7 @@ namespace ForExe
 
             for (int i = 1; i <= 16; i++) {
                 watch.Restart();
-                var dict2 = ForDLL.CounterWords.HowWords_p(ReadFile(), i);
+                var dict2 = ForDLL.CounterWords.HowWords_p(in_data, i);
                 watch.Stop();
                 Console.WriteLine("WithTask(CountTask = {0}):{1}",i,watch.Elapsed);
                 WriteFile((Dictionary<string, int>)dict2, @"C:\Users\Ra19\Documents\project_hlam\Less_Sharp\Les\WAW"+i+".txt");
