@@ -2,8 +2,6 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Diagnostics;
-
 
 namespace ForDLL
 {
@@ -24,8 +22,6 @@ namespace ForDLL
             }
 
             out_dict = out_dict.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
-            
-
 
             return out_dict;
         }

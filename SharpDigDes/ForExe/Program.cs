@@ -21,6 +21,8 @@ namespace ForExe
             watch.Stop();
             Console.WriteLine("WitOutTask:" + watch.Elapsed);
 
+            WriteFile((Dictionary<string, int>)dict);
+
             for (int i = 1; i <= 16; i++) {
                 watch.Restart();
                 var dict2 = ForDLL.CounterWords.HowWords_p(ReadFile(), i);
@@ -28,8 +30,6 @@ namespace ForExe
                 Console.WriteLine("WithTask(CountTask = {0}):{1}",i,watch.Elapsed);
                 WriteFile((Dictionary<string, int>)dict2, @"C:\Users\Ra19\Documents\project_hlam\Less_Sharp\Les\WAW"+i+".txt");
             }
-
-            WriteFile((Dictionary<string,int>)dict);
 
             Console.ReadKey();
 
