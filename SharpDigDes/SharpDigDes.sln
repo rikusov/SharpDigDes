@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForExe", "ForExe\ForExe.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForDLL", "ForDLL\ForDLL.csproj", "{93660691-75E8-4C9D-A69B-91A6B34B0B6A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractExem", "AbstractExem\AbstractExem.csproj", "{BE961911-DAE4-4A5B-B00C-963F787328C7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{93660691-75E8-4C9D-A69B-91A6B34B0B6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93660691-75E8-4C9D-A69B-91A6B34B0B6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93660691-75E8-4C9D-A69B-91A6B34B0B6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE961911-DAE4-4A5B-B00C-963F787328C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE961911-DAE4-4A5B-B00C-963F787328C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE961911-DAE4-4A5B-B00C-963F787328C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE961911-DAE4-4A5B-B00C-963F787328C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -2,13 +2,13 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Collections.Concurrent;
 
 namespace ForDLL
 {
     public static class CounterWords
     {
-        private static Dictionary<string, int> s_dict = null;
-        private static object locker = new object(); 
+        private static ConcurrentDictionary<string, int> s_dict = null;
         private static Dictionary<string, int> HowWords(string s){
 
             Dictionary<string, int> out_dict = new Dictionary<string, int>();
@@ -28,7 +28,7 @@ namespace ForDLL
 
         public static Dictionary<string, int> HowWords_p(string s, int count_thread = 2) {
 
-            s_dict = new Dictionary<string, int>();
+            s_dict = new ConcurrentDictionary<string, int>();
 
             var mc = Regex.Matches(Regex.Replace(s.ToLower(), @"[-]|[\d]", ""), @"\w+");
 
@@ -45,19 +45,16 @@ namespace ForDLL
 
             Task.WaitAll(a_task);
 
-            s_dict = s_dict.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
 
-            return s_dict;
-
+            return s_dict.OrderByDescending(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
         }
-
         private static void CountWord(MatchCollection mc, int start, int end) {
 
             for (int i = start; i < end; i++) {
                 if (s_dict.ContainsKey(mc[i].Value))
-                    lock(locker) s_dict[mc[i].Value]++;
+                    s_dict[mc[i].Value]++;
                 else
-                   lock(locker) s_dict[mc[i].Value] = 1;
+                   s_dict[mc[i].Value] = 1;
             
             }
         
