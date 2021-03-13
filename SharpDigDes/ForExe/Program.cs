@@ -33,6 +33,18 @@ namespace ForExe
                 WriteFile((Dictionary<string, int>)dict2, @"C:\Users\Ra19\Documents\project_hlam\Less_Sharp\Les\WAW"+i+".txt");
             }
 
+            var client = new WS_CounterWords.Service1Client();
+
+            watch.Restart();
+            Dictionary<string,int> dict3 = client.HowWords(in_data);
+            watch.Stop();
+
+            client.Close();
+
+            WriteFile(dict3, @"C:\Users\Ra19\Documents\project_hlam\Less_Sharp\Les\WAW_WS.txt");
+
+            Console.WriteLine("WithTaskToWebSerice(CountTask = {0}):{1}", Environment.ProcessorCount, watch.Elapsed);
+
             Console.ReadKey();
 
         }
